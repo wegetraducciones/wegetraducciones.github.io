@@ -63,6 +63,7 @@ nav a:hover,.ddbtn:hover,.ddbtn[aria-expanded="true"]{background:var(--bg2)}
 nav a.on{background:var(--bg2);border-color:var(--line)}
 nav a.cta{border-color:var(--accent);color:var(--accent);margin-left:8px}
 nav a.cta:hover{background:var(--accent);color:var(--accent-fg)}
+.menubtn,.navx,.navov{display:none}
 .dd{position:relative}
 .ddmenu{position:absolute;left:0;top:100%;margin-top:10px;width:340px;background:var(--card);border:1px solid var(--line);box-shadow:0 18px 36px -20px rgba(44,36,22,.5);z-index:30}
 .ddmenu a{display:block;padding:12px 18px;border:0;border-radius:0;border-bottom:1px solid var(--line)}
@@ -191,9 +192,46 @@ body.svc .homeonly{display:none}
   .menubar .wrap{gap:8px}
   nav a,.ddbtn{padding:8px 11px;font-size:14.5px}
   nav a.cta{margin-left:0}
-  .ddmenu{position:fixed;left:16px;right:16px;width:auto;top:auto;margin-top:8px}
-  body.h2 .brand .mark{height:52px;width:auto}
-  body.h2 .brand b{font-size:26px}
+  .menubar{position:static}
+  .menubar .wrap{position:relative}
+  .dd{position:static}
+  .ddmenu{position:absolute;left:0;right:0;top:100%;width:auto;margin-top:0}
+  .flags i{display:none}
+  .flags span{order:5;flex-basis:100%}
+  body.h2 .brand .mark{height:44px;width:auto}
+  body.h2 .brand b{font-size:24px}
+  body.h2 .menubar .wrap{padding-block:12px}
+}
+/* celular: menú lateral con puntitos y orden de secciones (la compu no cambia) */
+@media (max-width:900px){
+  .menubar{position:sticky}
+  .menubar .wrap{flex-wrap:nowrap;justify-content:space-between;gap:12px;padding-block:12px}
+  .menubtn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none;padding:0;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:3px;cursor:pointer}
+  .navov{display:block;position:fixed;inset:0;background:rgba(20,14,6,.45);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:55}
+  nav{position:fixed;top:0;bottom:0;left:0;width:min(82vw,320px);background:var(--bg);flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:0;padding:64px 14px 24px;overflow-y:auto;transform:translateX(-102%);visibility:hidden;transition:transform .25s,visibility .25s;z-index:60;box-shadow:8px 0 30px -12px rgba(0,0,0,.5)}
+  body.navopen nav{transform:none;visibility:visible}
+  body.navopen .navov{opacity:1;visibility:visible}
+  body.navopen{overflow:hidden}
+  .navx{display:block;position:absolute;top:12px;right:12px;width:40px;height:40px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:400 18px var(--sans);border-radius:3px;cursor:pointer}
+  nav a,nav .ddbtn{display:block;width:100%;padding:14px 12px;font-size:16px;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none}
+  nav a.on{background:var(--bg2)}
+  nav a.cta{margin:16px 0 0;text-align:center;border:1px solid var(--accent);border-radius:3px}
+  .dd{position:static}
+  .ddmenu{position:static;width:auto;margin:0 0 6px 10px;border:0;border-left:2px solid var(--line);box-shadow:none;background:none}
+  .ddmenu a{padding:10px 12px;border-bottom:0}
+  body{display:flex;flex-direction:column}
+  body>.wrap{width:100%}
+  .topbar{order:0}
+  .menubar{order:1}
+  .svcview{order:2}
+  main{order:3}
+  body>div:has(#proceso){order:4}
+  body>div:has(#servicios){order:5}
+  body>div:has(#sobre-mi){order:6}
+  body>div:has(#documentos){order:7}
+  body>div:has(#clientes){order:8}
+  body>div:has(#preguntas){order:9}
+  body>div:has(#contacto){order:10}
 }
 @media (max-width:520px){
   .grid2,.panel ul,.steps{grid-template-columns:1fr}
@@ -216,7 +254,9 @@ h1,h2,h3,.brand b,.ddmenu b,summary,.step .n{font-weight:400!important}
     <img class="mark" alt="" src="data:image/png;base64,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">
     <span><b>WEGE Traducciones</b></span>
   </a>
+  <button class="menubtn" id="menubtn" type="button" aria-label="Abrir menú" aria-expanded="false"><svg width="6" height="22" viewBox="0 0 6 22" aria-hidden="true"><circle cx="3" cy="3" r="2.4" fill="currentColor"/><circle cx="3" cy="11" r="2.4" fill="currentColor"/><circle cx="3" cy="19" r="2.4" fill="currentColor"/></svg></button>
   <nav aria-label="Principal">
+    <button class="navx" type="button" aria-label="Cerrar menú">✕</button>
     <a href="#inicio" data-go="inicio" class="on">Inicio</a>
     <div class="dd">
       <button class="ddbtn" id="ddbtn" type="button" aria-haspopup="true" aria-expanded="false">Servicios ▾</button>
@@ -235,6 +275,7 @@ h1,h2,h3,.brand b,.ddmenu b,summary,.step .n{font-weight:400!important}
     <a href="#preguntas" data-go="preguntas">Preguntas</a>
     <a href="#contacto" data-go="contacto" class="cta">Contacto</a>
   </nav>
+  <div class="navov" id="navov"></div>
 </div></div>
 
 <div class="wrap svcview" id="svcview" hidden></div>
@@ -433,9 +474,15 @@ h1,h2,h3,.brand b,.ddmenu b,summary,.step .n{font-weight:400!important}
   function li(x){return '<li>'+esc(x)+'</li>'}
   function go(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
   function closeDD(){ddmenu.hidden=true;ddbtn.setAttribute('aria-expanded','false')}
+  var menubtn=document.getElementById('menubtn');
+  function setNav(o){document.body.classList.toggle('navopen',o);menubtn.setAttribute('aria-expanded',o?'true':'false')}
+  menubtn.addEventListener('click',function(e){e.stopPropagation();setNav(!document.body.classList.contains('navopen'))});
+  document.getElementById('navov').addEventListener('click',function(){setNav(false)});
+  document.querySelector('.navx').addEventListener('click',function(){setNav(false)});
+  window.addEventListener('resize',function(){if(innerWidth>900)setNav(false)});
   ddbtn.addEventListener('click',function(e){e.stopPropagation();var open=ddmenu.hidden;ddmenu.hidden=!open;ddbtn.setAttribute('aria-expanded',open?'true':'false')});
   document.addEventListener('click',function(e){if(!e.target.closest('.dd'))closeDD()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDD()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDD();setNav(false)}});
   function setHash(h){try{history.replaceState(null,'','#'+h)}catch(e){}}
   function showHome(id){
     var was=document.body.classList.contains('svc');
@@ -458,7 +505,7 @@ h1,h2,h3,.brand b,.ddmenu b,summary,.step .n{font-weight:400!important}
   }
   document.addEventListener('click',function(e){
     var a=e.target.closest('[data-go],[data-svc]');if(!a)return;
-    e.preventDefault();closeDD();
+    e.preventDefault();closeDD();setNav(false);
     var sv=a.getAttribute('data-svc');
     if(sv)showSvc(sv);else showHome(a.getAttribute('data-go'));
   });
