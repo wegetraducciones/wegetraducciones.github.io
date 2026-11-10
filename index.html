@@ -508,7 +508,7 @@ h1,h2,h3,.brand b,.ddmenu b,summary,.step .n{font-weight:400!important}
     if(WEB3_KEY){fd.append('access_key',WEB3_KEY);fd.append('subject','Nueva consulta de traducción');fd.append('from_name','WEGE Traducciones')}else{fd.append('_subject','Nueva consulta de traducción')}
     err.textContent='Enviando…';
     fetch(EP,{method:'POST',body:fd,headers:{Accept:'application/json'}}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok&&j.success!==false}})}).then(function(r){
-      if(r.ok){err.textContent='';sent.querySelector('h3').textContent='Consulta enviada';done('Gracias por escribirme. Te respondo por mail en el día hábil.')}
+      if(r.ok){err.textContent='';sent.querySelector('h3').textContent='Consulta enviada';done('Gracias por escribirme. Te respondo a la brevedad. Por cualquier consulta o urgencia, podés mandarme el PDF de tu documento manualmente a mi mail: julietacaminos02@gmail.com')}
       else{err.textContent='No se pudo enviar. Probá de nuevo o escribime por WhatsApp.'}
     }).catch(function(){err.textContent='No se pudo enviar. Probá de nuevo o escribime por WhatsApp.'});
   });
